@@ -9,7 +9,7 @@
        actions: read
      steps:
      - name: Checkout repository
-       uses: actions/checkout@v4
+       uses: actions/checkout@v7
 -
 -    - name: Execute gradle build
 -      run: ./gradlew build    # Change this to build your mobile application
