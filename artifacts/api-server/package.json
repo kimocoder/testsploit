@@ -19,7 +19,7 @@
     "drizzle-orm": "catalog:",
     "express": "^5",
     "https-proxy-agent": "^9.1.0",
-    "pino": "^9",
+    "pino": "^10.0.0",
     "pino-http": "^10"
   },
   "devDependencies": {
