@@ -36,7 +36,7 @@ jobs:
                     java-version: '17'
                     distribution: 'temurin'
             -   name: Cache files
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: |
                         ~/.sonar
