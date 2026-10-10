@@ -20,7 +20,7 @@
     "express": "^5",
     "https-proxy-agent": "^9.1.0",
     "pino": "^10.0.0",
-    "pino-http": "^10"
+    "pino-http": "^11.0.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.10",
