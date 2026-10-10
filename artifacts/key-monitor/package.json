@@ -60,7 +60,7 @@
     "react-dom": "catalog:",
     "react-hook-form": "^7.55.0",
     "react-icons": "^5.4.0",
-    "react-resizable-panels": "^2.1.7",
+    "react-resizable-panels": "^4.0.0",
     "recharts": "^2.15.2",
     "sonner": "^2.0.7",
     "tailwind-merge": "catalog:",
