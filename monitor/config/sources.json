@@ -1,0 +1,698 @@
+[
+  {
+    "name": "grep.app",
+    "type": "grepapp",
+    "category": "code",
+    "url_template": "https://grep.app/search?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Sourcegraph",
+    "type": "sourcegraph",
+    "category": "code",
+    "url_template": "https://sourcegraph.com/search?q={query}&patternType=literal",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Kaggle",
+    "type": "kaggle",
+    "category": "datasets",
+    "url_template": "https://www.kaggle.com/search?q={query}+sortBy%3Adate",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "GitHub Code Search",
+    "type": "github_code",
+    "category": "code",
+    "url_template": "https://github.com/search?q={query}&type=code&s=indexed&o=desc",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "GitHub Gists",
+    "type": "gists",
+    "category": "snippets",
+    "url_template": "https://gist.github.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "searchcode.com",
+    "type": "searchcode",
+    "category": "code",
+    "url_template": "https://searchcode.com/?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "PublicWWW",
+    "type": "publicwww",
+    "category": "web",
+    "url_template": "https://publicwww.com/websites/{query}/",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "GitHub Repositories",
+    "type": "github_repos_api",
+    "category": "code",
+    "url_template": "https://github.com/search?q={query}&type=repositories&s=updated&o=desc",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "GitLab Explore",
+    "type": "gitlab_projects_api",
+    "category": "code",
+    "url_template": "https://gitlab.com/search?search={query}&scope=blobs",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Hugging Face Models",
+    "type": "html",
+    "category": "models",
+    "url_template": "https://huggingface.co/models?search={query}&sort=modified",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Hugging Face Datasets",
+    "type": "html",
+    "category": "datasets",
+    "url_template": "https://huggingface.co/datasets?search={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Observable",
+    "type": "html",
+    "category": "notebooks",
+    "url_template": "https://observablehq.com/search?query={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Hacker News Algolia API",
+    "type": "hn_algolia_api",
+    "category": "qa",
+    "url_template": "https://hn.algolia.com/api/v1/search_by_date?query={query}&tags=story,comment&hitsPerPage=50",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Stack Overflow API",
+    "type": "stackexchange_api",
+    "category": "qa",
+    "url_template": "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=creation&q={query}&site=stackoverflow&pagesize=30",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Zenodo API",
+    "type": "zenodo_api",
+    "category": "datasets",
+    "url_template": "https://zenodo.org/api/records?q={query}&sort=mostrecent&page=1&size=20",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Bitbucket",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://bitbucket.org/search?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Codeberg",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://codeberg.org/explore/repos?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "npm",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://www.npmjs.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "PyPI",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://pypi.org/search/?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Gitea",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://gitea.com/explore/repos?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Read the Docs",
+    "type": "html",
+    "category": "docs",
+    "url_template": "https://readthedocs.org/search/?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Docker Hub",
+    "type": "html",
+    "category": "containers",
+    "url_template": "https://hub.docker.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Artifact Hub",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://artifacthub.io/packages/search?ts_query_web={query}&sort=relevance&page=1",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Papers With Code",
+    "type": "html",
+    "category": "datasets",
+    "url_template": "https://paperswithcode.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "OpenML",
+    "type": "html",
+    "category": "datasets",
+    "url_template": "https://www.openml.org/search?type=data&sort=date&q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Repology",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://repology.org/projects/?search={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Colab Notebooks",
+    "type": "html",
+    "category": "notebooks",
+    "url_template": "https://colab.research.google.com/search#query={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "JSFiddle",
+    "type": "html",
+    "category": "snippets",
+    "url_template": "https://jsfiddle.net/search/?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "CodePen",
+    "type": "html",
+    "category": "snippets",
+    "url_template": "https://codepen.io/search/pens?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Gitee",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://search.gitee.com/?q={query}&type=code",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Sourcehut",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://sr.ht/projects?search={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Software Heritage",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://archive.softwareheritage.org/browse/search/?q={query}&with_visit=true&with_content=true",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "SourceForge",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://sourceforge.net/directory/?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Launchpad",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://code.launchpad.net/+search?field.text={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "crates.io",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://crates.io/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "RubyGems",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://rubygems.org/search?query={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "NuGet",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://www.nuget.org/packages?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "pkg.go.dev",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://pkg.go.dev/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Packagist",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://packagist.org/search/?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "pub.dev",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://pub.dev/packages?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Hex.pm",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://hex.pm/packages?search={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Anaconda",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://anaconda.org/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Maven Central",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://central.sonatype.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "CocoaPods",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://cocoapods.org/?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "WordPress Plugins",
+    "type": "html",
+    "category": "packages",
+    "url_template": "https://wordpress.org/plugins/search/{query}/",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Quay.io",
+    "type": "html",
+    "category": "containers",
+    "url_template": "https://quay.io/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Reddit",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://www.reddit.com/search/?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Lobste.rs",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://lobste.rs/search?q={query}&order=newest",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "DEV.to",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://dev.to/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Hashnode",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://hashnode.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "DuckDuckGo HTML",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://duckduckgo.com/html/?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Brave Search",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://search.brave.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Mojeek",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.mojeek.com/search?q={query}&fmt=html",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Marginalia",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://search.marginalia.nu/search?query={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Roboflow Universe",
+    "type": "html",
+    "category": "datasets",
+    "url_template": "https://universe.roboflow.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Figshare",
+    "type": "html",
+    "category": "datasets",
+    "url_template": "https://figshare.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Dryad",
+    "type": "html",
+    "category": "datasets",
+    "url_template": "https://datadryad.org/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Gitcode (CSDN)",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://gitcode.com/search?q={query}&type=repository",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Coding.net",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://coding.net/search?keyword={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "AtomGit",
+    "type": "html",
+    "category": "code",
+    "url_template": "https://atomgit.com/explore/repos?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "ModelScope",
+    "type": "html",
+    "category": "models",
+    "url_template": "https://www.modelscope.cn/search?search={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "CSDN Search",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://so.csdn.net/so/search?q={query}&t=blog",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "SegmentFault",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://segmentfault.com/search?q={query}&type=article",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Jianshu",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://www.jianshu.com/search?q={query}&type=note",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Baidu",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.baidu.com/s?wd={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "Sogou",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.sogou.com/web?query={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "360 Search",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.so.com/s?q={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "Qiita",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://qiita.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Zenn",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://zenn.dev/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Hatena Bookmark",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://b.hatena.ne.jp/search/text?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Yahoo! Japan",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://search.yahoo.co.jp/search?p={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "Note.com",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://note.com/search?context=note&q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Naver",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://search.naver.com/search.naver?query={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "Daum",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://search.daum.net/search?q={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "Velog",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://velog.io/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Habr",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://habr.com/en/search/?q={query}&target_type=posts",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Seznam",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://search.seznam.cz/?q={query}",
+    "enabled": true,
+    "max_parallel": 1
+  },
+  {
+    "name": "Qwant",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.qwant.com/?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Ecosia",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.ecosia.org/search?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Startpage",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://www.startpage.com/do/search?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Yep",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://yep.com/web?q={query}",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "Searx (be)",
+    "type": "html",
+    "category": "web",
+    "url_template": "https://searx.be/search?q={query}&format=html",
+    "enabled": true,
+    "max_parallel": 2
+  },
+  {
+    "name": "HackerNoon",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://hackernoon.com/search?query={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "freeCodeCamp",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://www.freecodecamp.org/news/search/?query={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "DZone",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://dzone.com/search?query={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Medium",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://medium.com/search?q={query}",
+    "enabled": true,
+    "max_parallel": 3
+  },
+  {
+    "name": "Substack",
+    "type": "html",
+    "category": "qa",
+    "url_template": "https://substack.com/search/{query}?searching=all_posts",
+    "enabled": true,
+    "max_parallel": 3
+  }
+]

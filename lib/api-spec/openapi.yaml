@@ -1,0 +1,513 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: API Key Monitor API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: monitor
+    description: Key monitoring operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /monitor/status:
+    get:
+      operationId: getMonitorStatus
+      tags: [monitor]
+      summary: Get monitor current status
+      responses:
+        "200":
+          description: Monitor status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonitorStatus"
+
+  /monitor/stats:
+    get:
+      operationId: getMonitorStats
+      tags: [monitor]
+      summary: Get aggregated monitor statistics
+      responses:
+        "200":
+          description: Stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonitorStats"
+
+  /monitor/results:
+    get:
+      operationId: getMonitorResults
+      tags: [monitor]
+      summary: Get found keys and URLs
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [keys, urls, all]
+            default: all
+        - name: service
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [valid, invalid, unchecked, all]
+            default: all
+      responses:
+        "200":
+          description: Results list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResultsPage"
+
+  /monitor/results/new:
+    get:
+      operationId: getNewResults
+      tags: [monitor]
+      summary: Get only new results from last cycle
+      responses:
+        "200":
+          description: New results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/KeyResult"
+
+  /monitor/cycle:
+    post:
+      operationId: triggerCycle
+      tags: [monitor]
+      summary: Trigger a manual search cycle
+      responses:
+        "200":
+          description: Cycle triggered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionResponse"
+
+  /monitor/validate/{id}:
+    post:
+      operationId: validateKey
+      tags: [monitor]
+      summary: Validate a specific found key
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+
+  /monitor/config:
+    get:
+      operationId: getMonitorConfig
+      tags: [monitor]
+      summary: Get current monitor configuration
+      responses:
+        "200":
+          description: Config
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonitorConfig"
+    put:
+      operationId: updateMonitorConfig
+      tags: [monitor]
+      summary: Update monitor configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MonitorConfig"
+      responses:
+        "200":
+          description: Updated config
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonitorConfig"
+
+  /monitor/auto-chain/status:
+    get:
+      operationId: getAutoChainStatus
+      tags: [monitor]
+      summary: Current auto-chain pipeline status
+      responses:
+        "200":
+          description: Status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutoChainStatus"
+
+  /monitor/auto-chain/trigger:
+    post:
+      operationId: triggerAutoChain
+      tags: [monitor]
+      summary: Manually trigger Discovery → ENV pipeline now
+      responses:
+        "200":
+          description: Trigger result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutoChainTriggerResponse"
+
+  /monitor/source-statuses:
+    get:
+      operationId: getSourceStatuses
+      tags: [monitor]
+      summary: Get status of all sources from last cycle
+      responses:
+        "200":
+          description: Source statuses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SourceStatus"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required: [status]
+
+    MonitorStatus:
+      type: object
+      properties:
+        running:
+          type: boolean
+        currentAction:
+          type: string
+        lastCycleAt:
+          type: string
+          nullable: true
+        nextRunAt:
+          type: string
+          nullable: true
+        secondsUntilNext:
+          type: integer
+        cycleInProgress:
+          type: boolean
+        cycleProgress:
+          type: object
+          properties:
+            done:
+              type: integer
+            total:
+              type: integer
+            startedAt:
+              type: string
+              nullable: true
+            etaSeconds:
+              type: integer
+              nullable: true
+            currentCategory:
+              type: string
+              nullable: true
+              description: Service category being scanned this cycle when category rotation is enabled (ai, payments, cloud, etc.)
+          required: [done, total]
+      required: [running, currentAction, cycleInProgress, secondsUntilNext]
+
+    MonitorStats:
+      type: object
+      properties:
+        totalCycles:
+          type: integer
+        totalNew:
+          type: integer
+        totalSeen:
+          type: integer
+        totalErrors:
+          type: integer
+        totalSources:
+          type: integer
+        totalQueries:
+          type: integer
+        keysFound:
+          type: integer
+        keysValid:
+          type: integer
+        keysInvalid:
+          type: integer
+        keysUnchecked:
+          type: integer
+        serviceBreakdown:
+          type: object
+          additionalProperties:
+            type: integer
+      required:
+        - totalCycles
+        - totalNew
+        - totalSeen
+        - totalErrors
+        - totalSources
+        - totalQueries
+        - keysFound
+        - keysValid
+        - keysInvalid
+        - keysUnchecked
+        - serviceBreakdown
+
+    KeyResult:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [key, url]
+        key:
+          type: string
+          nullable: true
+        keyMasked:
+          type: string
+          nullable: true
+        service:
+          type: string
+          nullable: true
+        source:
+          type: string
+        query:
+          type: string
+        url:
+          type: string
+        title:
+          type: string
+        snippet:
+          type: string
+        status:
+          type: string
+          enum: [valid, invalid, unchecked]
+        validatedAt:
+          type: string
+          nullable: true
+        publishedAt:
+          type: string
+          nullable: true
+        firstSeenAt:
+          type: string
+      required:
+        - id
+        - type
+        - source
+        - query
+        - url
+        - title
+        - snippet
+        - status
+        - firstSeenAt
+
+    ResultsPage:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/KeyResult"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+        pages:
+          type: integer
+      required: [items, total, page, limit, pages]
+
+    ActionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required: [success, message]
+
+    ValidationResult:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [valid, invalid, error]
+        message:
+          type: string
+      required: [id, status, message]
+
+    MonitorConfig:
+      type: object
+      properties:
+        queries:
+          type: array
+          items:
+            type: string
+        intervalSeconds:
+          type: integer
+        concurrency:
+          type: integer
+        maxResultsPerSource:
+          type: integer
+        httpTimeoutSeconds:
+          type: integer
+        enabledSources:
+          type: array
+          items:
+            type: string
+        autoValidate:
+          type: boolean
+        autoChainEnabled:
+          type: boolean
+          description: Auto Discovery → ENV scanner pipeline
+        autoChainIntervalSeconds:
+          type: integer
+          description: Interval between auto-chain cycles
+        autoChainMaxHosts:
+          type: integer
+          description: Max hosts per auto-chain discovery sweep
+        autoChainPorts:
+          type: string
+          description: Comma-separated ports for auto-chain discovery
+        autoChainDeepScan:
+          type: boolean
+          description: Run deep ENV scan in auto-chain
+        autoChainDiscoveriesPerPublic:
+          type: integer
+          description: Discovery→ENV iterations to chain per public-scanner cycle (24/7 loop)
+        autoChainSelfTriggerPublic:
+          type: boolean
+          description: When true, after a round completes the chain triggers the public scanner instead of waiting for its scheduled cycle
+        githubToken:
+          type: string
+          description: Personal access token used for GitHub code/repo/gist API calls. Empty = unauthenticated (60 req/h).
+        categoryRotation:
+          type: boolean
+          description: When true, each public-scanner cycle scans only one service category (ai, payments, cloud, …) instead of all 100+ key prefixes. Cuts cycle time ~10×.
+      required:
+        - queries
+        - intervalSeconds
+        - concurrency
+        - maxResultsPerSource
+        - httpTimeoutSeconds
+        - enabledSources
+        - autoValidate
+
+    AutoChainStatus:
+      type: object
+      properties:
+        phase:
+          type: string
+          enum: [idle, discovery, envscan, cooldown]
+        message:
+          type: string
+        startedAt:
+          type: integer
+          description: Epoch ms when the current phase started
+        lastCycleAt:
+          type: integer
+          description: Epoch ms when the last chain cycle finished
+        publicCycleSeenAt:
+          type: string
+          description: ISO timestamp of the public scanner cycle we last reacted to
+        manualTriggerPending:
+          type: boolean
+        lastTriggerSource:
+          type: string
+          nullable: true
+          description: "auto | manual"
+        discoveryRunning:
+          type: boolean
+        envScanRunning:
+          type: boolean
+        publicCycleInProgress:
+          type: boolean
+        publicLastCycleAt:
+          type: string
+        discoveryCountThisRound:
+          type: integer
+          description: How many discovery→envscan iterations completed in the current 24/7 round
+        discoveriesPerRound:
+          type: integer
+          description: Configured number of iterations per round before yielding to next public cycle
+      required:
+        - phase
+        - message
+        - startedAt
+        - lastCycleAt
+        - publicCycleSeenAt
+        - manualTriggerPending
+        - discoveryRunning
+        - envScanRunning
+        - publicCycleInProgress
+        - publicLastCycleAt
+
+    AutoChainTriggerResponse:
+      type: object
+      properties:
+        queued:
+          type: boolean
+        phase:
+          type: string
+        message:
+          type: string
+      required: [queued, phase, message]
+
+    SourceStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        category:
+          type: string
+        status:
+          type: string
+        enabled:
+          type: boolean
+      required: [name, category, status, enabled]
