@@ -14,6 +14,6 @@
     "@tailwindcss/oxide-win32-x64-msvc": "^4.3.3",
     "lightningcss-win32-x64-msvc": "^1.33.0",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.2"
+    "typescript": "~7.0.0"
   }
 }
