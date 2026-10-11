@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Set up Snyk CLI
-        uses: snyk/actions/setup@v3
+      - name: Set up Snyk CLI to check for security issues
+        uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
 
       - name: Snyk Code test
         run: snyk code test --sarif > snyk-code.sarif || true
